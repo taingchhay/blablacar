@@ -1,6 +1,6 @@
-import 'package:blabla/model/ride_pref/ride_pref.dart';
-import 'package:blabla/services/ride_prefs_service.dart';
 import 'package:flutter/material.dart';
+import 'package:week_3_blabla_project/model/ride_pref/ride_pref.dart';
+import 'package:week_3_blabla_project/services/ride_prefs_service.dart';
 import '../../theme/theme.dart';
 import 'widgets/ride_prefs_form.dart';
 import 'widgets/ride_prefs_tile.dart';
