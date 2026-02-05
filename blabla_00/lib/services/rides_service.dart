@@ -1,4 +1,4 @@
-import '../data/dummy_data.dart';
+import 'package:quiz_week3/data/dummy_data.dart';
 import '../model/ride/locations.dart';
 import '../model/ride/ride.dart';
 
@@ -7,7 +7,22 @@ import '../model/ride/ride.dart';
 ///   - The list of available rides
 ///
 class RidesService {
-  static List<Ride> allRides = fakeRides;
+  static List<Ride> availableRides = fakeRides; 
+  // TODO for now fake data
+  static List<Ride> filterByDeparture(Location departure) {
+    return availableRides
+        .where((ride) => ride.departure.name == departure.name)
+    .toList();
 
- 
+  static List<Ride> filterByDeparture(Location departure) {
+    return [];
+  }
+
+  static List<Ride> filterBySeatRequested(Location departure) {
+    return [];
+  }
+
+  static List<Ride> filterBy({Location? departure, int? seatRequested}) {
+    return [];
+  }
 }
