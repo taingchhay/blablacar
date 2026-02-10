@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:week_3_blabla_project/model/ride_pref/ride_pref.dart';
 import 'package:week_3_blabla_project/services/ride_prefs_service.dart';
+import 'package:week_3_blabla_project/ui/screens/ride_pref/widgets/bla_button.dart';
 import '../../theme/theme.dart';
 import 'widgets/ride_prefs_form.dart';
 import 'widgets/ride_prefs_tile.dart';
@@ -13,7 +14,12 @@ const String blablaHomeImagePath = 'assets/images/blabla_home.png';
 /// - Or select a last entered ride preferences and launch a search on it
 ///
 class RidePrefsScreen extends StatelessWidget {
-  const RidePrefsScreen({super.key});
+
+  const RidePrefsScreen({
+    super.key,
+
+    });
+    
 
   void onRidePrefSelected(RidePref ridePref) {
     // TODO
@@ -36,7 +42,16 @@ class RidePrefsScreen extends StatelessWidget {
             style: BlaTextStyles.heading.copyWith(color: Colors.white),
           ),
         ),
-        SizedBox(height: 100),
+        SizedBox(height: 300),
+
+        BlaButton(
+          text: "Search",
+          type: BlaButtonType.primary,
+          icon: Icons.search,
+          onPressed: () {},
+        ),
+
+        const SizedBox(height: 10),
 
         Container(
           margin: EdgeInsets.symmetric(horizontal: BlaSpacings.xxl),

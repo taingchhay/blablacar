@@ -48,7 +48,9 @@
   "chat.useAgentSkills": false,
 
   "github.copilot.enable": false,
-  "github.copilot.inlineSuggest.enable": false
+  "github.copilot.inlineSuggest.enable": false,
+  "cmake.sourceDirectory": "D:/Y3-Term2/Advanced-Mobile-Development/week3/quez_lab/blabla_00/linux"
+
 }
 
 
