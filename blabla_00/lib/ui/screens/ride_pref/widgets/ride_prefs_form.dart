@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:week_3_blabla_project/ui/screens/ride_pref/widgets/bla_button.dart';
+import 'package:week_3_blabla_project/ui/theme/theme.dart';
+import 'package:week_3_blabla_project/utils/date_time_utils.dart';
 import '../../../../model/ride/locations.dart';
 import '../../../../model/ride_pref/ride_pref.dart';
 
@@ -28,6 +30,8 @@ class _RidePrefFormState extends State<RidePrefForm> {
   Location? arrival;
   late int requestedSeats;
 
+  final TextEditingController passengerController = TextEditingController();
+
   // ----------------------------------
   // Initialize the Form attributes
   // ----------------------------------
@@ -36,6 +40,8 @@ class _RidePrefFormState extends State<RidePrefForm> {
   void initState() {
     super.initState();
     // TODO
+    passengerController.text = '1';
+    departureDate = DateTime.now();
   }
 
   // ----------------------------------
@@ -54,8 +60,55 @@ class _RidePrefFormState extends State<RidePrefForm> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [ 
+      children: [
+        ListTile(
+          leading: Icon(Icons.location_on, color: BlaColors.iconLight,size: 16,
+          ),
+          title: Text('Leave From',
+          style: TextStyle(color: BlaColors.textLight),
+          ),
+          onTap: (){},
+        ),
+
+        Divider(indent: 35, endIndent: 35),
+        ListTile(
+          leading: Icon(Icons.location_on, color: BlaColors.iconLight,size: 16,
+          ),
+          title: Text('Going to',
+          style: TextStyle(color: BlaColors.textLight),
+          ),
+          onTap: (){},
+        ),
+
+        Divider(indent: 35, endIndent: 35),
+        ListTile(
+          leading: Icon(Icons.calendar_today, color: BlaColors.iconLight,size: 16,
+          ), 
+          title: Text(
+            DateTimeUtils.formatDateTime(departureDate),
+            style: TextStyle(color: BlaColors.textLight),
+          ),
+          onTap: (){},
+        ),
+
+        Divider(indent: 35, endIndent: 35),
+        ListTile(
+          leading: Icon(Icons.person, color: BlaColors.iconLight, size: 16,
+          ),
+          title: TextField(
+            controller: passengerController,
+            decoration: InputDecoration(border: InputBorder.none),
+            style: TextStyle(color: BlaColors.textLight),
+          ),
+        ),
         
-        ]);
+        BlaButton(
+          text: "Search",
+          type: BlaButtonType.primary,
+          icon: Icons.search,
+          onPressed: () {},
+        ),
+      ],
+    );
   }
 }
