@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:week_3_blabla_project/ui/screens/ride_pref/widgets/bla_button.dart';
+import 'package:week_3_blabla_project/ui/screens/ride_pref/location_picker.dart';
 import 'package:week_3_blabla_project/ui/theme/theme.dart';
 import 'package:week_3_blabla_project/utils/date_time_utils.dart';
 import '../../../../model/ride/locations.dart';
@@ -47,6 +48,38 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // ----------------------------------
   // Handle events
   // ----------------------------------
+  void selectDeparture() async {
+    final currentLocation = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (builder) => LocationPicker()));
+    setState(() {
+      if (currentLocation != null) {
+        departure = currentLocation;
+      }
+    });
+  }
+
+  void selectArrival() async {
+    final arriveLocation = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LocationPicker()));
+    setState(() {
+      if (arriveLocation != null) {
+        arrival = arriveLocation;
+      }
+    });
+  }
+
+  void selectDate() async {
+    final DateTime? datePicked = await showDatePicker(
+        context: context,
+        initialDate: departureDate,
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 365)));
+    if (datePicked != null && datePicked != departureDate) {
+      setState(() {
+        departureDate = datePicked;
+      });
+    }
+  }
 
   // ----------------------------------
   // Compute the widgets rendering
@@ -62,38 +95,49 @@ class _RidePrefFormState extends State<RidePrefForm> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ListTile(
-          leading: Icon(Icons.location_on, color: BlaColors.iconLight,size: 16,
+          leading: Icon(
+            Icons.location_on,
+            color: BlaColors.iconLight,
+            size: 16,
           ),
-          title: Text('Leave From',
-          style: TextStyle(color: BlaColors.textLight),
+          title: Text(
+            departure?.name ?? 'Leave from',
+            style: TextStyle(color: BlaColors.textLight),
           ),
-          onTap: (){},
+          onTap: selectDeparture,
         ),
-
         Divider(indent: 35, endIndent: 35),
         ListTile(
-          leading: Icon(Icons.location_on, color: BlaColors.iconLight,size: 16,
+          leading: Icon(
+            Icons.location_on,
+            color: BlaColors.iconLight,
+            size: 16,
           ),
-          title: Text('Going to',
-          style: TextStyle(color: BlaColors.textLight),
+          title: Text(
+            arrival?.name ?? 'Going to',
+            style: TextStyle(color: BlaColors.textLight),
           ),
-          onTap: (){},
+          onTap: selectArrival,
         ),
-
         Divider(indent: 35, endIndent: 35),
         ListTile(
-          leading: Icon(Icons.calendar_today, color: BlaColors.iconLight,size: 16,
-          ), 
+          leading: Icon(
+            Icons.calendar_today,
+            color: BlaColors.iconLight,
+            size: 16,
+          ),
           title: Text(
             DateTimeUtils.formatDateTime(departureDate),
             style: TextStyle(color: BlaColors.textLight),
           ),
-          onTap: (){},
+          onTap: selectDate,
         ),
-
         Divider(indent: 35, endIndent: 35),
         ListTile(
-          leading: Icon(Icons.person, color: BlaColors.iconLight, size: 16,
+          leading: Icon(
+            Icons.person,
+            color: BlaColors.iconLight,
+            size: 16,
           ),
           title: TextField(
             controller: passengerController,
@@ -101,7 +145,6 @@ class _RidePrefFormState extends State<RidePrefForm> {
             style: TextStyle(color: BlaColors.textLight),
           ),
         ),
-        
         BlaButton(
           text: "Search",
           type: BlaButtonType.primary,
